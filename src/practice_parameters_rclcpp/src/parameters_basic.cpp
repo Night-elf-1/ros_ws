@@ -5,6 +5,19 @@
     # describe_parameter(name)  通过参数名字获取参数的描述
     # get_parameter                通过参数名字获取一个参数
     # set_parameter                设置参数的值
+
+  
+    /// The severity levels of log messages / loggers.
+  enum RCUTILS_LOG_SEVERITY
+  {
+    RCUTILS_LOG_SEVERITY_UNSET = 0,  ///< The unset log level
+    RCUTILS_LOG_SEVERITY_DEBUG = 10,  ///< The debug log level
+    RCUTILS_LOG_SEVERITY_INFO = 20,  ///< The info log level
+    RCUTILS_LOG_SEVERITY_WARN = 30,  ///< The warn log level
+    RCUTILS_LOG_SEVERITY_ERROR = 40,  ///< The error log level
+    RCUTILS_LOG_SEVERITY_FATAL = 50,  ///< The fatal log level
+  };
+
 */
 class ParametersBasicNode : public rclcpp::Node {
  public:

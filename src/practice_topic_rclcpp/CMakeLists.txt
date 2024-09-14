@@ -9,6 +9,8 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(turtlesim REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -22,12 +24,15 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_package()
+add_executable(turtle_circle src/turtle_circle.cpp)
+ament_target_dependencies(turtle_circle rclcpp geometry_msgs)
 
-add_executable(topic_publisher_01 src/topic_publisher_01.cpp)
-ament_target_dependencies(topic_publisher_01 rclcpp)
+add_executable(turtle_control src/turtle_control.cpp)
+ament_target_dependencies(turtle_control rclcpp geometry_msgs turtlesim)
 
 install(TARGETS
-  topic_publisher_01
+  turtle_circle
+  turtle_control
   DESTINATION lib/${PROJECT_NAME}
 )
+ament_package()
