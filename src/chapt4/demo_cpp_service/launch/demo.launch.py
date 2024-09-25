@@ -2,14 +2,14 @@ import launch
 import launch_ros
 
 def generate_launch_description():
-    action_declare_arg_max_spped = launch.actions.DeclareLaunchArgument('launch_max_speed', default_value='2.0')
+    action_declare_arg_max_spped = launch.actions.DeclareLaunchArgument('launch_max_speed', default_value='2.0')        # 参数声明动作
 
     action_node_turtle_control = launch_ros.actions.Node(
         package='demo_cpp_service',
         executable="turtle_control",
         output='screen',
-        parameters=[{'max_speed': launch.substitutions.LaunchConfiguration(
-  'launch_max_speed', default='2.0')}],
+        parameters=[{'max_speed': launch.substitutions.LaunchConfiguration(         # 添加参数选项 使用launch文件中launch_max_speed设置的值2.0替换
+  'launch_max_speed', default='2.0')}],                                             # 代码中的max_speed值
 
     )
     action_node_patrol_client = launch_ros.actions.Node(
