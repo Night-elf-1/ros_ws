@@ -1,0 +1,45 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+
+    rear_wheel_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+      joints:
+        - rear_right_wheel_joint
+        - rear_left_wheel_joint
+      state_publish_rate: 50
+      action_monitor_rate: 30
+      allow_partial_joints_goal: true
+      constraints:
+        goal_time: 0.6
+        stopped_velocity_tolerance: 0.02
+        rear_right_wheel_joint:
+          trajectory: 0.1
+          goal: 0.1
+        rear_left_wheel_joint:
+          trajectory: 0.1
+          goal: 0.1
+      gains:
+        rear_right_wheel_joint: {p: 100.0, d: 0.1, i: 0.01}
+        rear_left_wheel_joint: {p: 100.0, d: 0.1, i: 0.01}
+
+    front_steering_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+      joints:
+        - front_right_steering_joint
+        - front_left_steering_joint
+      state_publish_rate: 50
+      action_monitor_rate: 30
+      allow_partial_joints_goal: true
+      constraints:
+        goal_time: 0.6
+        stopped_velocity_tolerance: 0.02
+        front_right_steering_joint:
+          trajectory: 0.1
+          goal: 0.1
+        front_left_steering_joint:
+          trajectory: 0.1
+          goal: 0.1
+      gains:
+        front_right_steering_joint: {p: 100.0, d: 0.1, i: 0.01}
+        front_left_steering_joint: {p: 100.0, d: 0.1, i: 0.01}
