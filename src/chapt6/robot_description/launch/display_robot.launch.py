@@ -5,7 +5,7 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     # 获取默认路径
-    urdf_tutorial_path = get_package_share_directory('robot_description')
+    urdf_tutorial_path = get_package_share_directory('robot_description')           # 获取包路径
     default_model_path = urdf_tutorial_path + '/urdf/b_class_car/base.urdf.xacro'
     default_rviz_config_path = urdf_tutorial_path + '/rviz/robots.rviz'
     # 为 Launch 声明参数
@@ -17,6 +17,7 @@ def generate_launch_description():
         launch.substitutions.Command(
             ['xacro ', launch.substitutions.LaunchConfiguration('model')]),
         value_type=str)
+    
     # 状态发布节点
     robot_state_publisher_node = launch_ros.actions.Node(
         package='robot_state_publisher',
@@ -32,7 +33,7 @@ def generate_launch_description():
     rviz_node = launch_ros.actions.Node(
         package='rviz2',
         executable='rviz2',
-        arguments=['-d', default_rviz_config_path]
+        arguments=['-d', default_rviz_config_path]          # 传递命令行参数
     )
     return launch.LaunchDescription([
         action_declare_arg_mode_path,

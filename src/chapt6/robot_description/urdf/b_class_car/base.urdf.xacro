@@ -301,7 +301,7 @@
 
     <gazebo>
       <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-        <param>$(find robot_desscription)/config/controllers.yaml</param>
+        <param>$(find robot_description)/config/controllers.yaml</param>
       </plugin>
     </gazebo>
 
