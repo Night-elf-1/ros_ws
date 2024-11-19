@@ -1,6 +1,4 @@
 build/
 install/
 log/
-.vscode/
-log/latest/
-log/latest_build
+
