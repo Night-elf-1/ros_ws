@@ -6,8 +6,10 @@
     <!-- Instead, we need to add gazebo tags for our links that refer to Gazebo materials -->
     <gazebo reference="chassis_link">
         <material>Gazebo/White</material>
-        <mu1>0.5</mu1>
-        <mu2>0.5</mu2>
+        <mu1>0.5</mu1>      <!-- 静摩擦系数 -->
+                            <!-- 描述了一个物体在开始运动之前可以承受的最大摩擦力。静摩擦系数的值通常大于动摩擦系数，这意味着开始移动一个物体比保持其运动需要更多的力 -->
+        <mu2>0.5</mu2>      <!-- 动摩擦系数 -->
+                            <!-- 描述了一个物体在运动过程中受到的摩擦力。动摩擦系数决定了物体在持续运动状态下的摩擦阻力 -->
     </gazebo>
     <gazebo reference="fr_left_wheel_link">
         <material>Gazebo/Grey</material>
@@ -29,7 +31,7 @@
         <mu1>150.0</mu1>
         <mu2>10.0</mu2>
     </gazebo>
-    <gazebo reference="virtual_steer_link">
+    <gazebo reference="virtual_steer_link">             <!-- 方向盘转向link -->
         <material>Gazebo/Yellow</material>
     </gazebo>
 
@@ -40,40 +42,40 @@
         <mu2>1.0</mu2>
     </gazebo>
 
-    <gazebo reference="laser_link">
-      <sensor name="laser_sensor" type="ray">
-      <always_on>true</always_on>
-      <visualize>true</visualize>
-      <update_rate>50</update_rate>
-      <pose>0 0 0.2 0 0 0</pose>
+    <gazebo reference="laser_link">                     <!-- 指定这个传感器附加到的链接（link）名称 -->
+      <sensor name="laser_sensor" type="ray">           <!-- 为传感器定义一个名称 并 指定传感器类型为射线（ray），即激光传感器 -->
+      <always_on>true</always_on>                       <!-- 表示传感器始终处于开启状态 -->
+      <visualize>true</visualize>                       <!-- 表示在Gazebo的图形界面中可视化传感器的输出 -->
+      <update_rate>50</update_rate>                     <!-- 定义传感器的更新频率 -->
+      <pose>0 0 0.2 0 0 0</pose>                <!-- 定义传感器相对于其附着链接的位姿（位置和方向）。这里的位姿是（0, 0, 0.2）的平移和（0, 0, 0）的旋转（以弧度为单位） -->
       <ray>
           <scan>
-            <horizontal>
-              <samples>360</samples>
-              <resolution>1.000000</resolution>
-              <min_angle>0.000000</min_angle>
-              <max_angle>6.280000</max_angle>
+            <horizontal>                                <!-- 指定水平方向的扫描参数 -->
+              <samples>360</samples>                    <!-- 水平方向上的样本数量，这里是360，意味着覆盖360度 -->
+              <resolution>1.000000</resolution>         <!-- 每个样本之间的分辨率，这里设置为1度 -->
+              <min_angle>0.000000</min_angle>           <!-- 水平扫描的最小角度，这里是0度 -->
+              <max_angle>6.280000</max_angle>           <!-- 水平扫描的最大角度，这里是6.28弧度（相当于360度） -->
             </horizontal>
           </scan>
-          <range>
-            <min>0.120000</min>
+          <range>                                       <!-- 定义激光传感器的测量范围 -->
+            <min>0.120000</min>                         <!-- 可检测的最小距离，这里是0.12米 -->
             <max>10.5</max>
-            <resolution>0.015000</resolution>
+            <resolution>0.015000</resolution>           <!-- 测量分辨率，这里是0.015米 -->
           </range>
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.01</stddev>
+          <noise>                                       <!-- 定义传感器测量中的噪声 -->
+            <type>gaussian</type>                       <!-- 噪声类型为高斯分布 -->
+            <mean>0.0</mean>                            <!-- 噪声的均值 -->
+            <stddev>0.01</stddev>                       <!-- 噪声的标准差 -->
           </noise>
       </ray>
 
-      <plugin name="laserscan" filename="libgazebo_ros_ray_sensor.so">
-        <ros>
+      <plugin name="laserscan" filename="libgazebo_ros_ray_sensor.so">                  <!-- 定义用于发布传感器数据的插件 -->
+        <ros>                                           <!-- 定义ROS相关的参数 -->
           
-          <remapping>~/out:=scan</remapping>
+          <remapping>~/out:=scan</remapping>            <!-- 将插件发布的主题重命名为scan -->
         </ros>
-        <output_type>sensor_msgs/LaserScan</output_type>
-        <frame_name>laser_link</frame_name>
+        <output_type>sensor_msgs/LaserScan</output_type>        <!-- 定义雷达输出消息类型为sensor_msgs/LaserScan，这是ROS中用于激光扫描的标准消息类型 -->
+        <frame_name>laser_link</frame_name>             <!-- 定义输出激光扫描消息的参考坐标系名称 与定义的雷达link相同名字 -->
       </plugin>
       </sensor>
     </gazebo>
@@ -197,12 +199,12 @@
         <plugin name='gazebo_ackermann_drive' filename='libgazebo_ros_ackermann_drive.so'>
             <ros>
                 <!-- <namespace>ugv_gazebo_ackermann</namespace> -->
-                <remapping>cmd_vel:=cmd_vel</remapping>
-                <remapping>odom:=odom</remapping>
-                <remapping>distance:=distance</remapping>
+                <remapping>cmd_vel:=cmd_vel</remapping>             <!-- 速度接受器话题 -->
+                <remapping>odom:=odom</remapping>                   <!-- 里程计发布话题 -->
+                <remapping>distance:=distance</remapping>           <!-- 里程计距离发布话题，单位m -->
             </ros>
 
-            <update_rate>100.0</update_rate>
+            <update_rate>100.0</update_rate>                        <!-- 设置插件更新频率为100Hz。也就是/cmd_vel和/odom的订阅和发布频率 -->
 
             <!-- wheels -->
             <front_left_joint>fr_left_wheel_joint</front_left_joint>
@@ -215,13 +217,13 @@
 
             <!-- Max absolute steer angle for tyre in radians-->
             <!-- Any cmd_vel angular z greater than this would be capped -->
-            <max_steer>0.383972</max_steer>
+            <max_steer>0.383972</max_steer>                     <!-- 设置轮胎的最大转向角度（弧度），任何超出此值的cmd_vel角速度将被限制 -->
 
             <!-- Max absolute steering angle of steering wheel -->
-            <max_steering_angle>1.570796</max_steering_angle>
+            <max_steering_angle>1.570796</max_steering_angle>   <!-- 设置转向盘的最大转向角度（弧度） -->
 
             <!-- Max absolute linear speed in m/s -->
-            <max_speed>5</max_speed>
+            <max_speed>5</max_speed>                            <!-- 设置车辆的最大线速度（米/秒） -->
 
             <!-- PID tuning -->
             <left_steering_pid_gain>1500 0 1</left_steering_pid_gain>
@@ -240,12 +242,12 @@
             <publish_distance>true</publish_distance>
 
             <odometry_frame>odom</odometry_frame>
-            <robot_base_frame>base_footprint</robot_base_frame>
+            <robot_base_frame>base_footprint</robot_base_frame>         <!-- 设置机器人的基础坐标系 -->
 
         </plugin>
     </gazebo>
 
-    <!-- Virtual Steering wheel -->
+    <!-- Virtual Steering wheel 方向盘link -->
     <link name="virtual_steer_link">
         <visual>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />

@@ -49,16 +49,16 @@
             </geometry>
         </collision>
     </link>
-    <joint name="chassis_joint" type="fixed">
+    <joint name="chassis_joint" type="fixed">                   <!-- 将底盘link连接到base_link -->
         <parent link="base_link" />
         <child link="chassis_link" />
         <origin xyz="0.2078 0.0 0.1555" rpy="0 0 0" />
     </joint>
 
 
-    <!-- FRONT LEFT WHEEL -->
+    <!-- FRONT LEFT WHEEL 左前轮转向机构 -->
     <link name="fr_left_steer_link">
-        <inertial>
+        <inertial>          <!-- 设置左前轮转向机构的转动惯量 -->
             <origin xyz="-0.0002776492198312 0.0163539773588368 4.97346169803237E-09" rpy="0 0 0" />
             <mass value="${steering_mass}" />
             <inertia
@@ -68,15 +68,15 @@
                 iyz="0" izz="${steering_mass/2 * wheel_radius*wheel_radius}" />
         </inertial>
     </link>
-    <joint name="fr_left_steer_joint" type="revolute">
-        <origin xyz="0.34058 0.24619 -0.1535" rpy="0 0 0" />
+    <joint name="fr_left_steer_joint" type="revolute">              <!-- 将左前轮转向机构连接到底盘上 -->
+        <origin xyz="0.34058 0.24619 -0.1535" rpy="0 0 0" />        <!-- xyz三个方向上的偏移 -->
         <parent link="chassis_link" />
         <child link="fr_left_steer_link" />
-        <axis xyz="0 0 1" />
+        <axis xyz="0 0 1" />                                        <!-- 表示转向机构只可绕着Z轴旋转 -->
         <limit upper="0.6" lower="-0.6" effort="-1.0" velocity="-1.0" />
     </joint>
-    <link name="fr_left_wheel_link">
-        <inertial>
+    <link name="fr_left_wheel_link">                                <!-- 左前轮link -->
+        <inertial>                                                  <!-- 左前轮转动惯量 -->
             <origin xyz="-3.5837499634539E-10 4.97346158701006E-09 -0.016356334080185" rpy="0 0 0" />
             <mass value="${wheel_mass}" />
             <inertia
@@ -85,7 +85,7 @@
                 iyy="${wheel_mass/12*(3*wheel_radius*wheel_radius + wheel_thickness*wheel_thickness)}"
                 iyz="0" izz="${wheel_mass/2 * wheel_radius*wheel_radius}" />
         </inertial>
-        <visual>
+        <visual>                                                    <!-- 左前轮可视化 -->
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
                 <cylinder radius="${wheel_radius}" length="${wheel_thickness}" />
@@ -101,19 +101,17 @@
             </geometry>
         </collision>
     </link>
-    <joint name="fr_left_wheel_joint" type="continuous">
+    <joint name="fr_left_wheel_joint" type="continuous">            <!-- 将左前轮连接到左前轮转向机构上 -->
         <origin xyz="0 0 0" rpy="1.5708 0 0.016976" />
         <parent link="fr_left_steer_link" />
         <child link="fr_left_wheel_link" />
         <axis xyz="0 0 -1" />
         <dynamics friction="0.8" damping="0.5" />
         <limit lower="-3.14159" upper="3.14159" effort="200" velocity="-1" />
-
-
     </joint>
 
 
-    <!-- FRONT RIGHT WHEEL -->
+    <!-- FRONT RIGHT WHEEL  右前轮转向机构 -->
     <link name="fr_right_steer_link">
         <inertial>
             <origin xyz="0.000274981985673328 -0.0163540222836661 -3.24802407192237E-11" rpy="0 0 0" />
@@ -165,12 +163,10 @@
         <axis xyz="0 0 1" />
         <dynamics friction="0.8" damping="0.5" />
         <limit lower="-3.14159" upper="3.14159" effort="200" velocity="-1" />
-
-
     </joint>
 
 
-    <!-- REAR LEFT WHEEL -->
+    <!-- REAR LEFT WHEEL  左后轮 -->
     <link name="re_left_wheel_link">
         <inertial>
             <origin xyz="1.245E-09 1.7252E-06 -0.010284" rpy="0 0 0" />
@@ -209,7 +205,7 @@
     </joint>
 
 
-    <!-- REAR RIGHT WHEEL -->
+    <!-- REAR RIGHT WHEEL  右后轮 -->
     <link name="re_right_wheel_link">
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -248,7 +244,7 @@
 
 
 
-<!-- LASER -->
+<!-- LASER 雷达 这里只设置了外观，没有设置功能-->
     <link name="laser_link">
     <visual>
         <geometry>
