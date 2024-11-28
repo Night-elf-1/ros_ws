@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:macro name="imu_xacro" params="xyz">
+    <xacro:macro name="imu_xacro" params="xyz">                     <!-- 定义IMU传感器 -->
         <link name="imu_link">
             <visual>
                 <origin xyz="0 0 00" rpy="0 0 0" />

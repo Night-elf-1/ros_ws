@@ -1,5 +1,5 @@
 
-<robot name="classb_car" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="classb_car" xmlns:xacro="http://www.ros.org/wiki/xacro">       <!-- 表示urdf使用xacro宏语言 -->
 
     <xacro:property name="PI" value="3.141"/>
 
@@ -265,7 +265,7 @@
       <dynamics damping="0.1"/>
     </joint>
 
-    <gazebo reference="base_link">
+    <gazebo reference="base_link">               <!-- 设置base)link在gazebo世界中的颜色为黑色 -->
         <material>Gazebo/Black</material>
     </gazebo>
 

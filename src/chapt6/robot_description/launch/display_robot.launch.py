@@ -14,7 +14,7 @@ def generate_launch_description():
         description='URDF 的绝对路径')
     # 获取文件内容生成新的参数
     robot_description = launch_ros.parameter_descriptions.ParameterValue(
-        launch.substitutions.Command(
+        launch.substitutions.Command(                                           # 将xacro文件转换成urdf文件命令 xacro + 文件路径
             ['xacro ', launch.substitutions.LaunchConfiguration('model')]),
         value_type=str)
     
