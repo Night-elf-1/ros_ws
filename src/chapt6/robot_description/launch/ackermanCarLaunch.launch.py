@@ -12,6 +12,8 @@ from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+import launch
+import launch_ros
 import xacro
 
 
@@ -25,6 +27,9 @@ def generate_launch_description():
     )
     gazebo_world_path = os.path.join(
         get_package_share_directory("robot_description"), "world", "customtest.world"
+    )
+    rviz_path = os.path.join(
+        get_package_share_directory("robot_description"), "rviz", "robots.rviz"
     )
 
     robot_state_publisher_node = Node(
@@ -61,12 +66,20 @@ def generate_launch_description():
         output="screen",
     )
 
+    # RViz 节点
+    rviz_node = launch_ros.actions.Node(
+        package='rviz2',
+        executable='rviz2',
+        arguments=['-d', rviz_path]          # 传递命令行参数
+    )
+
     return LaunchDescription(
         [
             use_sim_time_arg,
             gazebo_node,                    # GAZEBO仿真节点
             gazebo_spawn_entity_node,       # Gazebo实体生成节点
             robot_state_publisher_node,     # 发布机器人的状态信息。这里传入我们的刚刚写好的总xacro文件
+            rviz_node                       # 启动rviz可视化
         ]
     )
 
