@@ -23,7 +23,7 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-install(DIRECTORY launch urdf rviz world config           # 将此功能包下面的urdf、rviz、world、config文件夹安装到share/robot_description文件夹下
+install(DIRECTORY launch urdf rviz world config slamconfig          # 将此功能包下面的urdf、rviz、world、config文件夹安装到share/robot_description文件夹下
   DESTINATION share/${PROJECT_NAME}
 )
 

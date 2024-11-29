@@ -24,7 +24,7 @@ def generate_launch_description():
         get_package_share_directory("robot_description"), "urdf", "ackermanCar", "sim.xacro"
     )
     gazebo_world_path = os.path.join(
-        get_package_share_directory("robot_description"), "world", "custom.world"
+        get_package_share_directory("robot_description"), "world", "customtest.world"
     )
 
     robot_state_publisher_node = Node(
