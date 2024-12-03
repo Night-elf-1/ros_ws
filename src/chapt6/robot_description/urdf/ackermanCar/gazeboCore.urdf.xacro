@@ -194,6 +194,14 @@
     </gazebo>
 
 
+    <!-- 定义ros2_control接口 -->
+    <!-- <gazebo>
+      <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+        <robotNamespace>/ackermann</robotNamespace>
+      </plugin>
+    </gazebo> -->
+
+
     <!-- ACKERMANN DRIVE PLUGIN -->
     <gazebo>
         <plugin name='gazebo_ackermann_drive' filename='libgazebo_ros_ackermann_drive.so'>
