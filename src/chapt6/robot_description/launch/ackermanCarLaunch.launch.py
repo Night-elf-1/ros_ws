@@ -23,8 +23,8 @@ def generate_launch_description():
         "use_sim_time", default_value="true", description="Use simulation clock if true"
     )
     urdf_path = os.path.join(
-        get_package_share_directory("robot_description"), "urdf", "fourwheel", "base.urdf.xacro"
-        # get_package_share_directory("robot_description"), "urdf", "ackermanCar", "sim.xacro"
+        #get_package_share_directory("robot_description"), "urdf", "fourwheel", "base.urdf.xacro"
+        get_package_share_directory("robot_description"), "urdf", "ackermanCar", "sim.xacro"
     )
     gazebo_world_path = os.path.join(
         get_package_share_directory("robot_description"), "world", "customtest.world"
