@@ -139,7 +139,7 @@ controller_server:
       yaw_goal_tolerance: 0.15
     # DWB parameters
     FollowPath:
-      plugin: "dwb_core::DWBLocalPlanner"
+      plugin: "nav2_custom_controller::CustomController"
       debug_trajectory_details: True
       min_vel_x: 0.0
       min_vel_y: 0.0
@@ -279,7 +279,7 @@ planner_server:
     use_sim_time: True
     planner_plugins: ["GridBased"]
     GridBased:
-      plugin: "nav2_navfn_planner/NavfnPlanner"
+      plugin: "nav2_custom_planner/CustomPlanner"
       tolerance: 0.5
       use_astar: false
       allow_unknown: true
