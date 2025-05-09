@@ -45,7 +45,7 @@
     <gazebo reference="laser_link">                     <!-- 指定这个传感器附加到的链接（link）名称 -->
       <sensor name="laser_sensor" type="ray">           <!-- 为传感器定义一个名称 并 指定传感器类型为射线（ray），即激光传感器 -->
       <always_on>true</always_on>                       <!-- 表示传感器始终处于开启状态 -->
-      <visualize>true</visualize>                       <!-- 表示在Gazebo的图形界面中可视化传感器的输出 -->
+      <visualize>false</visualize>                       <!-- 表示在Gazebo的图形界面中可视化传感器的输出 -->
       <update_rate>50</update_rate>                     <!-- 定义传感器的更新频率 -->
       <pose>0 0 0.2 0 0 0</pose>                <!-- 定义传感器相对于其附着链接的位姿（位置和方向）。这里的位姿是（0, 0, 0.2）的平移和（0, 0, 0）的旋转（以弧度为单位） -->
       <ray>

@@ -83,4 +83,3 @@ def generate_launch_description():
             rviz_node                       # 启动rviz可视化
         ]
     )
-
